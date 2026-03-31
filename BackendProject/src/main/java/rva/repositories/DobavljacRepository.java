@@ -1,0 +1,14 @@
+package rva.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import rva.models.Dobavljac;
+
+@Repository
+public interface DobavljacRepository extends JpaRepository<Dobavljac, Long> {
+
+	List<Dobavljac> findByNazivLike (String naziv);
+}
