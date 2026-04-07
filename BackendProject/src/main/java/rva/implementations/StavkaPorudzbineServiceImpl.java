@@ -63,4 +63,9 @@ public class StavkaPorudzbineServiceImpl implements StavkaPorudzbineService {
 		return repo.findByPorudzbina(porudzbina);
 	}
 
+	@Override
+	public Optional<StavkaPorudzbine> findById(long id) {
+		return repo.findById(id);
+	}
+
 }

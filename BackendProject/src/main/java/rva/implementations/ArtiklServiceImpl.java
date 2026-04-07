@@ -47,7 +47,12 @@ public class ArtiklServiceImpl implements ArtiklService {
 
 	@Override
 	public List<Artikl> getArtiklsByNaziv(String naziv) {
-		return repo.findByNazivLike(naziv);
+		return repo.findByNazivContainingIgnoreCase(naziv);
+	}
+
+	@Override
+	public Optional<Artikl> findById(long id) {
+		return repo.findById(id);
 	}
 
 }

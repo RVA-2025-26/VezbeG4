@@ -48,7 +48,12 @@ public class DobavljacServiceImpl implements DobavljacService {
 
 	@Override
 	public List<Dobavljac> getDobavljacsByNaziv(String naziv) {
-		return repo.findByNazivLike(naziv);
+		return repo.findByNazivContainingIgnoreCase(naziv);
+	}
+
+	@Override
+	public Optional<Dobavljac> findById(long id) {
+		return repo.findById(id);
 	}
 
 }

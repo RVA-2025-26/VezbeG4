@@ -62,4 +62,9 @@ public class PorudzbinaServiceImpl implements PorudzbinaService {
 		return repo.findByDobavljac(dobavljac);
 	}
 
+	@Override
+	public Optional<Porudzbina> findById(long id) {
+		return repo.findById(id);
+	}
+
 }

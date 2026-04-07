@@ -10,5 +10,5 @@ import rva.models.Artikl;
 @Repository
 public interface ArtiklRepository extends JpaRepository<Artikl, Long> {
 
-	List<Artikl> findByNazivLike (String naziv);
+	List<Artikl> findByNazivContainingIgnoreCase (String naziv);
 }
