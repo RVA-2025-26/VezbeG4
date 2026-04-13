@@ -24,16 +24,16 @@ public class Porudzbina {
 	private Date datumIsporuke;
 	private boolean placeno;
 	private double iznos;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "dobavljac")
 	private Dobavljac dobavljac;
-	
-	@OneToMany(mappedBy="porudzbina", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "porudzbina", cascade = CascadeType.ALL)
 	private List<StavkaPorudzbine> stavke;
-	
+
 	public Porudzbina() {
-		
+
 	}
 
 	public Porudzbina(long id, Date datumPorudzbine, Date datumIsporuke, boolean placeno, double iznos) {
