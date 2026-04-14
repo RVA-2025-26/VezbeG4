@@ -32,13 +32,16 @@ public class StavkaPorudzbine {
 		
 	}
 
-	public StavkaPorudzbine(long id, int redniBroj, double kolicina, double cena, String jedinicaMere) {
+	public StavkaPorudzbine(long id, int redniBroj, double kolicina, double cena,
+			String jedinicaMere, Artikl artikl, Porudzbina porudzbina) {
 		super();
 		this.id = id;
 		this.redniBroj = redniBroj;
 		this.kolicina = kolicina;
 		this.cena = cena;
 		this.jedinicaMere = jedinicaMere;
+		this.artikl = artikl;
+		this.porudzbina = porudzbina;
 	}
 
 	public long getId() {
@@ -81,4 +84,21 @@ public class StavkaPorudzbine {
 		this.jedinicaMere = jedinicaMere;
 	}
 
+	public Artikl getArtikl() {
+		return artikl;
+	}
+
+	public void setArtikl(Artikl artikl) {
+		this.artikl = artikl;
+	}
+
+	public Porudzbina getPorudzbina() {
+		return porudzbina;
+	}
+
+	public void setPorudzbina(Porudzbina porudzbina) {
+		this.porudzbina = porudzbina;
+	}
+
+	
 }

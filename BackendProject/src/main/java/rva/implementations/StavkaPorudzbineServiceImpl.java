@@ -37,7 +37,7 @@ public class StavkaPorudzbineServiceImpl implements StavkaPorudzbineService {
 	public Optional<StavkaPorudzbine> update(StavkaPorudzbine body, long id) {
 		if(existsById(id)) {
 			body.setId(id);
-			Optional.of(repo.save(body));
+			return Optional.of(repo.save(body));
 		}
 		return Optional.empty();
 	}
