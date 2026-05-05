@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rva.models.Artikl;
 import rva.models.StavkaPorudzbine;
+import rva.services.ArtiklService;
+import rva.services.PorudzbinaService;
 import rva.services.StavkaPorudzbineService;
 
 @RestController
@@ -23,6 +26,11 @@ public class StavkaPorudzbineController {
 
 	@Autowired
 	private StavkaPorudzbineService service;
+	
+	@Autowired
+	private ArtiklService artiklService;
+	@Autowired
+	private PorudzbinaService porudzbinaService;
 	
 	@GetMapping("/stavkaPorudzbines")
 	public ResponseEntity<?> getStavkaPorudzbines(@RequestParam(required = false) Double cena,
@@ -71,5 +79,16 @@ public class StavkaPorudzbineController {
 		}
 		return ResponseEntity.status(404)
 				.body(String.format("Resource with an ID: %s does not exist", id));
+	}
+	
+	@GetMapping("/stavkaPorudzbines/artikl")
+	public ResponseEntity<?> getStavkaPorudzbinesByArtikl(@RequestParam Long artikl){
+		Optional<Artikl> artiklResult = artiklService.findById(artikl);
+		if(artiklResult.isEmpty())
+			return new ResponseEntity<String>(String.format("Artikl with id: %s doesnt exist",artikl), HttpStatus.NOT_FOUND);
+		List<StavkaPorudzbine> porudzbine = service.getStavkasByArtikl(artiklResult.get());
+		if(porudzbine.isEmpty())
+			return new ResponseEntity<String>(String.format("No entities with foreign key: %S",artikl), HttpStatus.NOT_FOUND);
+		return ResponseEntity.ok(porudzbine);
 	}
 }
