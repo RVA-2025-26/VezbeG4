@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rva.models.Dobavljac;
 import rva.models.Porudzbina;
+import rva.services.DobavljacService;
 import rva.services.PorudzbinaService;
 
 @RestController
@@ -23,6 +25,9 @@ public class PorudzbinaController {
 
 	@Autowired
 	private PorudzbinaService service;
+	
+	@Autowired
+	private DobavljacService dobavljacService;
 
 	@GetMapping("/porudzbinas")
 	public ResponseEntity<?> getPorudzbinas(@RequestParam(required = false) Boolean placeno,
@@ -81,4 +86,34 @@ public class PorudzbinaController {
 		}
 		return ResponseEntity.status(404).body(String.format("Resource with an ID: %s does not exist", id));
 	}
+	
+	@GetMapping("/porudzbinas/dobavljac")
+	public ResponseEntity<?> getPorudzbinaByDobavljac(@RequestParam Long dobavljacId){
+		 Optional<Dobavljac> dobavljac =  dobavljacService.findById(dobavljacId);
+		 if(dobavljac.isEmpty()) {
+			 return ResponseEntity.status(404)
+					 .body(String.format("Dobavljac with an ID: %s does not exist",
+							 dobavljacId));
+		 }
+		List<Porudzbina> porudzbine =  service.getPorudzbinasByDobavljac(dobavljac.get());
+		if(porudzbine.isEmpty()) {
+			return ResponseEntity.status(404)
+					 .body(String.format("Porudzbina with dobavljac ID: %s does not exist",
+							 dobavljacId));
+		}
+		return ResponseEntity.ok(porudzbine);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

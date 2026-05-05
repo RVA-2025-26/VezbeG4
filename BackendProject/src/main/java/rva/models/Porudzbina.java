@@ -36,13 +36,15 @@ public class Porudzbina {
 
 	}
 
-	public Porudzbina(long id, Date datumPorudzbine, Date datumIsporuke, boolean placeno, double iznos) {
+	public Porudzbina(long id, Date datumPorudzbine, 
+			Date datumIsporuke, boolean placeno, double iznos, Dobavljac dobavljac) {
 		super();
 		this.id = id;
 		this.datumPorudzbine = datumPorudzbine;
 		this.datumIsporuke = datumIsporuke;
 		this.placeno = placeno;
 		this.iznos = iznos;
+		this.dobavljac = dobavljac;
 	}
 
 	public long getId() {
@@ -84,5 +86,15 @@ public class Porudzbina {
 	public void setIznos(double iznos) {
 		this.iznos = iznos;
 	}
+
+	public Dobavljac getDobavljac() {
+		return dobavljac;
+	}
+
+	public void setDobavljac(Dobavljac dobavljac) {
+		this.dobavljac = dobavljac;
+	}
+	
+	
 
 }

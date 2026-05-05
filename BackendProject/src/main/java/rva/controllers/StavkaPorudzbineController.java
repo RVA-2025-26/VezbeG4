@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.models.Artikl;
+<<<<<<< HEAD
+=======
+import rva.models.Porudzbina;
+>>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 import rva.models.StavkaPorudzbine;
 import rva.services.ArtiklService;
 import rva.services.PorudzbinaService;
@@ -29,9 +33,17 @@ public class StavkaPorudzbineController {
 	
 	@Autowired
 	private ArtiklService artiklService;
+<<<<<<< HEAD
 	@Autowired
 	private PorudzbinaService porudzbinaService;
 	
+=======
+	
+	@Autowired
+	private PorudzbinaService porudzbinaService;
+	
+	
+>>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 	@GetMapping("/stavkaPorudzbines")
 	public ResponseEntity<?> getStavkaPorudzbines(@RequestParam(required = false) Double cena,
 			@RequestParam(required = false) Long id){
@@ -82,6 +94,7 @@ public class StavkaPorudzbineController {
 	}
 	
 	@GetMapping("/stavkaPorudzbines/artikl")
+<<<<<<< HEAD
 	public ResponseEntity<?> getStavkaPorudzbinesByArtikl(@RequestParam Long artikl){
 		Optional<Artikl> artiklResult = artiklService.findById(artikl);
 		if(artiklResult.isEmpty())
@@ -90,5 +103,38 @@ public class StavkaPorudzbineController {
 		if(porudzbine.isEmpty())
 			return new ResponseEntity<String>(String.format("No entities with foreign key: %S",artikl), HttpStatus.NOT_FOUND);
 		return ResponseEntity.ok(porudzbine);
+=======
+	public ResponseEntity<?> getStavkaPorudzbineByArtikl(@RequestParam Long artiklId){
+		 Optional<Artikl> artikl =  artiklService.findById(artiklId);
+		 if(artikl.isEmpty()) {
+			 return ResponseEntity.status(404)
+					 .body(String.format("Artikl with an ID: %s does not exist",
+							 artiklId));
+		 }
+		List<StavkaPorudzbine> stavke =  service.getStavkasByArtikl(artikl.get());
+		if(stavke.isEmpty()) {
+			return ResponseEntity.status(404)
+					 .body(String.format("Stavka with artikl ID: %s does not exist",
+							 artiklId));
+		}
+		return ResponseEntity.ok(stavke);
+	}
+	
+	@GetMapping("/stavkaPorudzbines/porudzbina")
+	public ResponseEntity<?> getStavkaPorudzbineByPorudzbina(@RequestParam Long porudzbinaId){
+		 Optional<Porudzbina> porudzbina =  porudzbinaService.findById(porudzbinaId);
+		 if(porudzbina.isEmpty()) {
+			 return ResponseEntity.status(404)
+					 .body(String.format("Porudzbina with an ID: %s does not exist",
+							 porudzbinaId));
+		 }
+		List<StavkaPorudzbine> stavke =  service.getStavkasByPorudzbina(porudzbina.get());
+		if(stavke.isEmpty()) {
+			return ResponseEntity.status(404)
+					 .body(String.format("Stavka with porudzbina ID: %s does not exist",
+							 porudzbinaId));
+		}
+		return ResponseEntity.ok(stavke);
+>>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 	}
 }
