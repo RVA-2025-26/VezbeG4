@@ -1,0 +1,10 @@
+.test{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+h1{
+    color:blue;
+    font-size: 42px;
+}
