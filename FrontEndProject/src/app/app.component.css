@@ -1,10 +1,14 @@
-.test{
-    width: 100%;
+mat-expansion-panel{
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    min-height: 80px;
 }
 
-h1{
-    color:blue;
-    font-size: 42px;
+mat-sidenav{
+    background-color: rgba(128, 128, 128, 0.139);
+}
+
+a[mat-raised-button]{
+    color: white;
 }

@@ -83,7 +83,7 @@ class StavkaPorudzbineControllerIntegrationTest {
 	@Test
 	@Order(5)
 	void createStavkaPorudzbine() {
-		StavkaPorudzbine newStavka = new StavkaPorudzbine(5, 5, 5000, "test");
+		StavkaPorudzbine newStavka = new StavkaPorudzbine();
 
 		ResponseEntity<StavkaPorudzbine> response = template.postForEntity(endPoint, newStavka, StavkaPorudzbine.class);
 		assertEquals(5, response.getBody().getRedniBroj());
@@ -97,7 +97,7 @@ class StavkaPorudzbineControllerIntegrationTest {
 	@Test
 	@Order(6)
 	void updateStavkaPorudzbine() {
-		StavkaPorudzbine updatedStavka = new StavkaPorudzbine(5, 5, 660000, "PUT");
+		StavkaPorudzbine updatedStavka = new StavkaPorudzbine();
 		HttpEntity<StavkaPorudzbine> putEntity = new HttpEntity<StavkaPorudzbine>(updatedStavka);
 		ResponseEntity<StavkaPorudzbine> response = 
 				template.exchange(endPoint+"?id="+largestId,HttpMethod.PUT,putEntity,StavkaPorudzbine.class);

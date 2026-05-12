@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,16 +17,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import rva.models.Artikl;
-<<<<<<< HEAD
-=======
 import rva.models.Porudzbina;
->>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 import rva.models.StavkaPorudzbine;
 import rva.services.ArtiklService;
 import rva.services.PorudzbinaService;
 import rva.services.StavkaPorudzbineService;
 
 @RestController
+@CrossOrigin
 public class StavkaPorudzbineController {
 
 	@Autowired
@@ -33,17 +32,11 @@ public class StavkaPorudzbineController {
 	
 	@Autowired
 	private ArtiklService artiklService;
-<<<<<<< HEAD
-	@Autowired
-	private PorudzbinaService porudzbinaService;
-	
-=======
 	
 	@Autowired
 	private PorudzbinaService porudzbinaService;
 	
 	
->>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 	@GetMapping("/stavkaPorudzbines")
 	public ResponseEntity<?> getStavkaPorudzbines(@RequestParam(required = false) Double cena,
 			@RequestParam(required = false) Long id){
@@ -94,16 +87,7 @@ public class StavkaPorudzbineController {
 	}
 	
 	@GetMapping("/stavkaPorudzbines/artikl")
-<<<<<<< HEAD
-	public ResponseEntity<?> getStavkaPorudzbinesByArtikl(@RequestParam Long artikl){
-		Optional<Artikl> artiklResult = artiklService.findById(artikl);
-		if(artiklResult.isEmpty())
-			return new ResponseEntity<String>(String.format("Artikl with id: %s doesnt exist",artikl), HttpStatus.NOT_FOUND);
-		List<StavkaPorudzbine> porudzbine = service.getStavkasByArtikl(artiklResult.get());
-		if(porudzbine.isEmpty())
-			return new ResponseEntity<String>(String.format("No entities with foreign key: %S",artikl), HttpStatus.NOT_FOUND);
-		return ResponseEntity.ok(porudzbine);
-=======
+
 	public ResponseEntity<?> getStavkaPorudzbineByArtikl(@RequestParam Long artiklId){
 		 Optional<Artikl> artikl =  artiklService.findById(artiklId);
 		 if(artikl.isEmpty()) {
@@ -135,6 +119,6 @@ public class StavkaPorudzbineController {
 							 porudzbinaId));
 		}
 		return ResponseEntity.ok(stavke);
->>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
+
 	}
 }

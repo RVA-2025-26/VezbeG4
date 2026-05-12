@@ -32,12 +32,8 @@ public class StavkaPorudzbine {
 		
 	}
 
-<<<<<<< HEAD
-	public StavkaPorudzbine(int redniBroj, double kolicina, double cena, String jedinicaMere) {
-=======
-	public StavkaPorudzbine(long id, int redniBroj, double kolicina, double cena,
+	public StavkaPorudzbine(int redniBroj, double kolicina, double cena,
 			String jedinicaMere, Artikl artikl, Porudzbina porudzbina) {
->>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 		super();
 		this.redniBroj = redniBroj;
 		this.kolicina = kolicina;
@@ -94,11 +90,6 @@ public class StavkaPorudzbine {
 	public void setArtikl(Artikl artikl) {
 		this.artikl = artikl;
 	}
-<<<<<<< HEAD
-	
-	
-
-=======
 
 	public Porudzbina getPorudzbina() {
 		return porudzbina;
@@ -109,5 +100,4 @@ public class StavkaPorudzbine {
 	}
 
 	
->>>>>>> b50c34f6804cacf25ec5c0606d7ae4492b34da2d
 }
