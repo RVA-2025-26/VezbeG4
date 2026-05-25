@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
+import { Artikl } from '../models/artikl';
 
 @Injectable({
   providedIn: 'root'
@@ -11,5 +12,17 @@ export class ArtiklService {
 
   public getAllArtikls(): Observable<any>{
     return this.httpClient.get("http://localhost:8080/artikls");
+  }
+
+  public createArtikl(artikl:Artikl):Observable<any>{
+    return this.httpClient.post("http://localhost:8080/artikls", artikl);
+  }
+
+  public updateArtikl(artikl:Artikl):Observable<any>{
+    return this.httpClient.put(`http://localhost:8080/artikls?id=${artikl.id}`, artikl);
+  }
+
+  public deleteArtikl(id:number):Observable<any>{
+    return this.httpClient.delete(`http://localhost:8080/artikls?id=${id}`);
   }
 }
