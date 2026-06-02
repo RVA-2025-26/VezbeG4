@@ -16,7 +16,7 @@ import { DobavljacDialogComponent } from '../../dialogs/dobavljac-dialog/dobavlj
 export class DobavljacComponent {
 
   displayedColumns = ['id', 'naziv', 'kontakt','adresa', 'actions'];
-    dataSource!:MatTableDataSource<Dobavljac>;
+    dataSource:MatTableDataSource<Dobavljac> = new MatTableDataSource<Dobavljac>([]);
   
     constructor(private service: DobavljacService, private dialog:MatDialog){}
   
@@ -27,7 +27,7 @@ export class DobavljacComponent {
     
     public loadData():void{
       this.service.getAllDobavljacs().subscribe(
-        {next: (data) => {this.dataSource = new MatTableDataSource<Dobavljac>(data)}, 
+        {next: (data) => {this.dataSource.data = data}, 
         error: (err) => console.log(err)}
     
       )
@@ -38,7 +38,7 @@ export class DobavljacComponent {
       ref.componentInstance.flag = flag;
       ref.afterClosed().subscribe(
         (response) => {
-          if(response === 1){
+          if(response){
             this.loadData();
           }
         }

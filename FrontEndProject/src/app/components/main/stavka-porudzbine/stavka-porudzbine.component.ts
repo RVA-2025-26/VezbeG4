@@ -18,7 +18,7 @@ import { Porudzbina } from '../../../models/porudzbina';
 export class StavkaPorudzbineComponent implements OnInit, OnChanges {
 
   displayedColumns = ['id', 'redniBroj','kolicina','jedinicaMere','cena','artikl','actions'];
-  dataSource!:MatTableDataSource<StavkaPorudzbine>;
+  dataSource:MatTableDataSource<StavkaPorudzbine> = new MatTableDataSource<StavkaPorudzbine>([]);
 
   @Input()
   childSelectedPorudzbina!:Porudzbina;
@@ -37,7 +37,7 @@ export class StavkaPorudzbineComponent implements OnInit, OnChanges {
   
   public loadData():void{
     this.service.getStavkeByPorudzbina(this.childSelectedPorudzbina.id).subscribe(
-      {next: (data) => {this.dataSource = new MatTableDataSource<StavkaPorudzbine>(data)}, 
+      {next: (data) => {this.dataSource.data = data}, 
       error: (err) => console.log(err)}
   
     )
@@ -49,7 +49,7 @@ export class StavkaPorudzbineComponent implements OnInit, OnChanges {
     ref.componentInstance.data.porudzbina = this.childSelectedPorudzbina;
     ref.afterClosed().subscribe(
       (response) => {
-        if(response === 1){
+        if(response){
           this.loadData();
         }
       }

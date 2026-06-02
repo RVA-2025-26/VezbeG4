@@ -19,7 +19,7 @@ import { StavkaPorudzbineComponent } from '../stavka-porudzbine/stavka-porudzbin
 export class PorudzbinaComponent {
   displayedColumns = ['id', 'datumPorudzbine', 'datumIsporuke','iznos','placeno',
   'dobavljac', 'actions'];
-  dataSource!:MatTableDataSource<Porudzbina>;
+  dataSource:MatTableDataSource<Porudzbina> = new MatTableDataSource<Porudzbina>([]);
 
   parentSelectedPorudzbina!:Porudzbina;
 
@@ -32,7 +32,7 @@ export class PorudzbinaComponent {
   
   public loadData():void{
     this.service.getAllPorudzbinas().subscribe(
-      {next: (data) => {this.dataSource = new MatTableDataSource<Porudzbina>(data)}, 
+      {next: (data) => {this.dataSource.data = data}, 
       error: (err) => console.log(err)}
   
     )
@@ -44,7 +44,7 @@ export class PorudzbinaComponent {
     ref.componentInstance.flag = flag;
     ref.afterClosed().subscribe(
       (response) => {
-        if(response === 1){
+        if(response){
           this.loadData();
         }
       }
